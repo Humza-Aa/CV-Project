@@ -1,0 +1,16 @@
+.infoList {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.infoList > div{
+    display: flex;
+    gap: 10px;
+}
+
+
+p {
+    margin: 0;
+    font-size: 12px;
+}
