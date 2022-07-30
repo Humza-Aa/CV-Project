@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Education from "./components/Education";
+import Personal from "./components/Personal";
 import RenderInfo from "./components/RenderInfo";
 import "./styles/App.css";
 
@@ -7,6 +9,7 @@ class App extends Component {
     super();
 
     this.state = {
+      //Personal Info
       userInfo: {
         Fname: "",
         Lname: "",
@@ -14,9 +17,17 @@ class App extends Component {
         phNumber: "",
       },
       editDisabled: true,
+      //Educational Info
+      educationInfo: {
+        schoolName: "",
+        titleOfStudying: "",
+        from: "",
+        to: ""
+      },
+      educationEditDisabled: true, 
     };
   }
-  handleChange = (e) => {
+  handlePersonalInfoChange = (e) => {
     const target = e.target;
     this.setState({
       userInfo: {
@@ -26,17 +37,15 @@ class App extends Component {
     });
   };
 
-  onSubmitInfo = (e) => {
+  onSubmitPersonalInfo = (e) => {
     e.preventDefault();
-    console.log(e.target.elements);
-    this.disableForm(e.target.elements);
+    this.disablePersonalForm(e.target.elements);
     this.setState({
       editDisabled: !this.state.editDisabled,
     });
   };
 
-  disableForm = (formElements) => {
-    console.log(formElements);
+  disablePersonalForm = (formElements) => {
     for (let i = 0; i < 5; i++) {
       formElements[i].disabled = "true";
     }
@@ -48,157 +57,63 @@ class App extends Component {
     }
   };
 
+
+  //Education Info
+
+  handleEducationInfoChange = (e) => {
+    const target = e.target;
+    this.setState({
+      educationInfo: {
+        ...this.state.educationInfo,
+        [target.name]: target.value,
+      },
+    });
+  };
+
+  onSubmitEducationInfo = (e) => {
+    e.preventDefault();
+    this.disableEducationForm(e.target.elements);
+    this.setState({
+      disableEducationForm: !this.state.disableEducationForm,
+    });
+  };
+
+  disableEducationForm = (formElements) => {
+    for (let i = 0; i < 5; i++) {
+      formElements[i].disabled = "true";
+    }
+  };
+
   render() {
-    const { Fname, Lname, email, phNumber } = this.state.userInfo;
     const userInfo = this.state.userInfo;
+    const editDisabled = this.state.editDisabled;
+    const personalFunctions = {
+      handleChange: this.handlePersonalInfoChange,
+      onSubmitInfo: this.onSubmitPersonalInfo,
+      disableForm: this.disablePersonalForm,
+    };
+    const education = this.state.educationInfo;
+    const educationEditDisabled = this.state.educationEditDisabled; 
+    const educationFunctions = {
+      handleChange: this.handleEducationInfoChange,
+      onSubmitInfo: this.onSubmitEducationInfo,
+      disableForm: this.disableEducationForm,
+    };
     return (
       <>
         <div className="App">
           <div className="appLayout">
             <div className="layout">
               <div className="personal">
-                <div>
-                  <h2>Personal Information</h2>
-                  <form className="formLayout" onSubmit={this.onSubmitInfo}>
-                    <div className="firstNameDiv">
-                      <label htmlFor="Fname" className="labels">
-                        First Name:
-                      </label>
-                      <input
-                        name="Fname"
-                        type="text"
-                        value={Fname}
-                        id="Fname"
-                        onChange={this.handleChange}
-                        required
-                        disabled={!this.state.editDisabled}
-                      />
-                    </div>
-                    <div className="lastNameDiv">
-                      <label htmlFor="Lname" className="labels">
-                        Last Name:
-                      </label>
-                      <input
-                        name="Lname"
-                        type="text"
-                        value={Lname}
-                        id="Lname"
-                        onChange={this.handleChange}
-                        required
-                        disabled={!this.state.editDisabled}
-                      />
-                    </div>
-                    <div className="emailDiv">
-                      <label htmlFor="email">Email:</label>
-                      <input
-                        name="email"
-                        type="email"
-                        value={email}
-                        id="email"
-                        onChange={this.handleChange}
-                        required
-                        disabled={!this.state.editDisabled}
-                      />
-                    </div>
-                    <div className="phNumberDiv">
-                      <label htmlFor="phNumber">Phone Number:</label>
-                      <input
-                        name="phNumber"
-                        type="tel"
-                        value={phNumber}
-                        id="phNumber"
-                        onChange={this.handleChange}
-                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                        required
-                        disabled={!this.state.editDisabled}
-                      />
-                    </div>
-                    <div id="saveBtn">
-                      <button type="submit" disabled={!this.state.editDisabled}>
-                        Save
-                      </button>
-                      <button
-                        className="edit"
-                        type="submit"
-                        disabled={this.state.editDisabled}
-                      >
-                        Edit
-                      </button>
-                    </div>
-                  </form>
-                </div>
+                <Personal
+                  {...userInfo}
+                  editDisabled={editDisabled}
+                  {...personalFunctions}
+                />
               </div>
               <div className="education">
-                <h2>Educational Experiences</h2>
-                <form className="formLayout" onSubmit={this.onSubmitInfo}>
-                  <div className="firstNameDiv">
-                    <label htmlFor="Fname" className="labels">
-                      First Name:
-                    </label>
-                    <input
-                      name="Fname"
-                      type="text"
-                      value={Fname}
-                      id="Fname"
-                      onChange={this.handleChange}
-                      required
-                      disabled={!this.state.editDisabled}
-                    />
-                  </div>
-                  <div className="lastNameDiv">
-                    <label htmlFor="Lname" className="labels">
-                      Last Name:
-                    </label>
-                    <input
-                      name="Lname"
-                      type="text"
-                      value={Lname}
-                      id="Lname"
-                      onChange={this.handleChange}
-                      required
-                      disabled={!this.state.editDisabled}
-                    />
-                  </div>
-                  <div className="emailDiv">
-                    <label htmlFor="email">Email:</label>
-                    <input
-                      name="email"
-                      type="email"
-                      value={email}
-                      id="email"
-                      onChange={this.handleChange}
-                      required
-                      disabled={!this.state.editDisabled}
-                    />
-                  </div>
-                  <div className="phNumberDiv">
-                    <label htmlFor="phNumber">Phone Number:</label>
-                    <input
-                      name="phNumber"
-                      type="tel"
-                      value={phNumber}
-                      id="phNumber"
-                      onChange={this.handleChange}
-                      pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                      required
-                      disabled={!this.state.editDisabled}
-                    />
-                  </div>
-                  <div id="saveBtn">
-                    <button type="submit" disabled={!this.state.editDisabled}>
-                      Save
-                    </button>
-                    <button
-                      className="edit"
-                      type="submit"
-                      disabled={this.state.editDisabled}
-                    >
-                      Edit
-                    </button>
-                  </div>
-                </form>
+                <Education {...education} {...educationFunctions} educationEditDisabled = {educationEditDisabled}/>   
               </div>
-              <div></div>
             </div>
           </div>
           <div className="appLayout">

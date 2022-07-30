@@ -2,49 +2,37 @@ import React, { Component } from "react";
 import "../styles/Personal.css";
 
 class Personal extends Component {
-//   constructor() {
-//     super();
+  // handleChange = (e) => {
+  //   const target = e.target;
+  //   this.setState({
+  //     userInfo: {
+  //       ...this.props.userInfo,
+  //       [target.name]: target.value,
+  //     },
+  //   });
+  // };
 
-//     this.state = {
-//       userInfo: {
-//         Fname: "",
-//         Lname: "",
-//         email: "",
-//         phNumber: "",
-//       },
-//       personalInfo: [],
-//     };
-//   }
-//   handleChange = (e) => {
-//     const target = e.target;
-//     this.setState({
-//       userInfo: {
-//         ...this.state.userInfo,
-//         [target.name]: target.value,
-//       },
-//     });
-//   };
+  // onSubmitInfo = (e) => {
+  //   e.preventDefault();
+  //   this.disableForm(e.target.elements);
+  //   this.setState({
+  //     editDisabled: !this.props.editDisabled,
+  //   });
+  // };
 
-//   onSubmitInfo = (e) => {
-//     e.preventDefault();
-//     console.log(e);
-//     this.setState({
-//       personalInfo: this.state.personalInfo.concat(this.state.userInfo),
-//       userInfo: {
-//         Fname: "",
-//         Lname: "",
-//         email: "",
-//         phNumber: "",
-//       },
-//     });
-//   };
+  // disableForm = (formElements) => {
+  //   console.log(formElements);
+  //   for (let i = 0; i < 5; i++) {
+  //     formElements[i].disabled = "true";
+  //   }
+  // };
 
   render() {
-    const { Fname, Lname, email, phNumber } = this.props;
+    const { Fname, Lname, email, phNumber, editDisabled, onSubmitInfo, handleChange} = this.props;
     return (
       <div>
         <h2>Personal Information</h2>
-        <form className="formLayout" onSubmit={this.onSubmitInfo}>
+        <form className="formLayout" onSubmit={onSubmitInfo}>
           <div className="firstNameDiv">
             <label htmlFor="Fname" className="labels">
               First Name:
@@ -54,9 +42,9 @@ class Personal extends Component {
               type="text"
               value={Fname}
               id="Fname"
-              onChange={this.handleChange}
+              onChange={handleChange}
               required
-              disabled={!this.state.editDisabled}
+              disabled={!editDisabled}
             />
           </div>
           <div className="lastNameDiv">
@@ -68,9 +56,9 @@ class Personal extends Component {
               type="text"
               value={Lname}
               id="Lname"
-              onChange={this.handleChange}
+              onChange={handleChange}
               required
-              disabled={!this.state.editDisabled}
+              disabled={!editDisabled}
             />
           </div>
           <div className="emailDiv">
@@ -80,9 +68,9 @@ class Personal extends Component {
               type="email"
               value={email}
               id="email"
-              onChange={this.handleChange}
+              onChange={handleChange}
               required
-              disabled={!this.state.editDisabled}
+              disabled={!editDisabled}
             />
           </div>
           <div className="phNumberDiv">
@@ -92,20 +80,20 @@ class Personal extends Component {
               type="tel"
               value={phNumber}
               id="phNumber"
-              onChange={this.handleChange}
+              onChange={handleChange}
               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               required
-              disabled={!this.state.editDisabled}
+              disabled={!editDisabled}
             />
           </div>
           <div id="saveBtn">
-            <button type="submit" disabled={!this.state.editDisabled}>
+            <button type="submit" disabled={!editDisabled}>
               Save
             </button>
             <button
               className="edit"
               type="submit"
-              disabled={this.state.editDisabled}
+              disabled={editDisabled}
             >
               Edit
             </button>
