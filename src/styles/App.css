@@ -33,12 +33,19 @@ html {
     grid-template-rows: repeat(3, 1fr);
 }
 
-h2 {
+.layoutRender {
+    display: grid;
+    grid-template-rows: 120px 1fr 1fr;
+}
+
+h2, h5 {
     margin: 0;
     text-align: center;
     padding-bottom: 10px;
 }
-
+h5 {
+    padding-top: 10px;
+}
 h6 {
     margin: 0;
 }

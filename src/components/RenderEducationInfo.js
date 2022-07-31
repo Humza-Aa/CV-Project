@@ -1,27 +1,27 @@
 import React, {Component} from "react";
 import "../styles/RenderInfo.css";
 
-class RenderInfo extends Component {
+class RenderEducationInfo extends Component {
     render() {
+        const {schoolName, titleOfStudy, from, to} = this.props.educationInfo;
         return(
             <div>
-                <h2>Personal Information</h2>
                 <div className="infoList">
                     <div className="personalInfo">
-                        <h6>First Name:</h6>
-                        <p>{this.props.Fname}</p>
+                        <h6>School Name:</h6>
+                        <p>{schoolName}</p>
                     </div>
                     <div className="personalInfo">
-                        <h6>Last Name:</h6>
-                        <p>{this.props.Lname}</p>
+                        <h6>Title of Study:</h6>
+                        <p>{titleOfStudy}</p>
                     </div>
                     <div className="personalInfo">
-                        <h6>Email:</h6>
-                        <p>{this.props.email}</p>
+                        <h6>From:</h6>
+                        <p>{from}</p>
                     </div>
                     <div className="personalInfo">
-                        <h6>Phone Number:</h6>
-                        <p>{this.props.phNumber}</p>
+                        <h6>To:</h6>
+                        <p>{to}</p>
                     </div>
                 </div>
             </div>
@@ -29,4 +29,4 @@ class RenderInfo extends Component {
     }
 }
 
-export default RenderInfo;
+export default RenderEducationInfo;

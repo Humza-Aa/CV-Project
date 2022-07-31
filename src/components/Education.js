@@ -7,9 +7,10 @@ class Education extends Component {
       titleOfStudy,
       from,
       to,
-      educationEditDisabled,
       onSubmitInfo,
       handleChange,
+      getEditEducationInfo,
+      editEducationButton
     } = this.props;
     return (
       <div>
@@ -26,7 +27,6 @@ class Education extends Component {
               id="schoolName"
               onChange={handleChange}
               required
-              disabled={!educationEditDisabled}
             />
           </div>
           <div className="titleOfStudyDiv">
@@ -40,7 +40,6 @@ class Education extends Component {
               id="titleOfStudy"
               onChange={handleChange}
               required
-              disabled={!educationEditDisabled}
             />
           </div>
           <div className="fromDiv">
@@ -52,7 +51,6 @@ class Education extends Component {
               id="from"
               onChange={handleChange}
               required
-              disabled={!educationEditDisabled}
             />
           </div>
           <div className="toDiv">
@@ -64,14 +62,13 @@ class Education extends Component {
               id="to"
               onChange={handleChange}
               required
-              disabled={!educationEditDisabled}
             />
           </div>
           <div id="saveBtn">
-            <button type="submit" disabled={!educationEditDisabled}>
+            <button type="submit">
               Save
             </button>
-            <button className="edit" type="submit" disabled={educationEditDisabled}>
+            <button className="edit" type="button" onClick={getEditEducationInfo} disabled={editEducationButton}>
               Edit
             </button>
           </div>

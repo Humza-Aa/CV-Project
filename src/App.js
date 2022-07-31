@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Education from "./components/Education";
 import Personal from "./components/Personal";
-import RenderInfo from "./components/RenderInfo";
+import RenderEducationInfo from "./components/RenderEducationInfo";
+import RenderInfo from "./components/RenderPersonalInfo";
 import "./styles/App.css";
 
 class App extends Component {
@@ -20,11 +21,15 @@ class App extends Component {
       //Educational Info
       educationInfo: {
         schoolName: "",
-        titleOfStudying: "",
+        titleOfStudy: "",
         from: "",
         to: ""
       },
       educationEditDisabled: true, 
+      educationInfoAll: [],
+      index: 0,
+      educationIndex:0,
+      editEducationButton: true
     };
   }
   handlePersonalInfoChange = (e) => {
@@ -72,17 +77,48 @@ class App extends Component {
 
   onSubmitEducationInfo = (e) => {
     e.preventDefault();
-    this.disableEducationForm(e.target.elements);
+
     this.setState({
-      disableEducationForm: !this.state.disableEducationForm,
+      educationInfoAll: this.state.educationInfoAll.concat(this.state.educationInfo),
+      educationInfo: {
+        schoolName: "",
+        titleOfStudy: "",
+        from: "",
+        to: ""
+      },
+      editEducationButton: false      
     });
   };
 
-  disableEducationForm = (formElements) => {
-    for (let i = 0; i < 5; i++) {
-      formElements[i].disabled = "true";
+  getEditEducationInfo = () => {
+    const educationInfo = [...this.state.educationInfoAll];
+    const currentInfo = educationInfo[this.state.educationIndex];
+    educationInfo.splice(this.state.educationIndex, 1);
+
+    this.setState({
+      educationInfo: {
+        schoolName: currentInfo.schoolName,
+        titleOfStudy: currentInfo.titleOfStudy,
+        from: currentInfo.from,
+        to: currentInfo.to
+      }, 
+      educationInfoAll: educationInfo,
+    })
+    if (this.state.educationIndex === this.state.educationInfoAll.length) {
+      this.setState({
+        educationIndex: this.state.educationIndex + 1,
+      })
     }
+    else {
+      this.setState({
+        educationIndex: 0,
+      })
+    }
+    this.setState({
+      editEducationButton: true,
+    })
   };
+  
 
   render() {
     const userInfo = this.state.userInfo;
@@ -93,12 +129,21 @@ class App extends Component {
       disableForm: this.disablePersonalForm,
     };
     const education = this.state.educationInfo;
-    const educationEditDisabled = this.state.educationEditDisabled; 
+    const editEducationButton = this.state.editEducationButton;
     const educationFunctions = {
       handleChange: this.handleEducationInfoChange,
       onSubmitInfo: this.onSubmitEducationInfo,
-      disableForm: this.disableEducationForm,
+      getEditEducationInfo: this.getEditEducationInfo,
     };
+
+    const educationRender = this.state.educationInfoAll.map((info, index) => {
+      return(
+        <>
+          {(index > 0) && <h5>Education Experience Number {index+1}</h5>}
+          <RenderEducationInfo key={index} educationInfo={info}/>
+        </>
+      )
+    });
     return (
       <>
         <div className="App">
@@ -112,16 +157,19 @@ class App extends Component {
                 />
               </div>
               <div className="education">
-                <Education {...education} {...educationFunctions} educationEditDisabled = {educationEditDisabled}/>   
+                <Education {...education} {...educationFunctions} editEducationButton = {editEducationButton}/>   
               </div>
             </div>
           </div>
           <div className="appLayout">
-            <div className="layout">
+            <div className="layoutRender">
               <div className="personal">
                 <RenderInfo {...userInfo} />
               </div>
-              <div></div>
+              <div className="education">
+                <h2>Education Information</h2>
+                {educationRender}
+              </div>
               <div></div>
             </div>
           </div>
