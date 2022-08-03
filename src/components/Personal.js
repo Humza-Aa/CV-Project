@@ -12,7 +12,6 @@ class Personal extends Component {
       onSubmitInfo,
       handleChange,
     } = this.props;
-    console.log(editDisabled);
     return (
       <div>
         <h2>Personal Information</h2>

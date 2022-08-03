@@ -6,7 +6,7 @@ class PracticalExperience extends Component {
     const {
         companyName,
         positionTitle,
-        mainTask,
+        mainTasks,
         from,
         to,
         onSubmitInfo,
@@ -49,10 +49,10 @@ class PracticalExperience extends Component {
                 Main Tasks:
             </label>
             <input
-              name="mainTask"
+              name="mainTasks"
               type="text"
-              value={mainTask}
-              id="mainTask"
+              value={mainTasks}
+              id="mainTasks"
               onChange={handleChange}
               required
             />

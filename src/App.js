@@ -4,6 +4,7 @@ import Personal from "./components/Personal";
 import PracticalExperience from "./components/PracticalExp";
 import RenderEducationInfo from "./components/RenderEducationInfo";
 import RenderInfo from "./components/RenderPersonalInfo";
+import RenderPracticalInfo from "./components/RenderPracticalInfo";
 import "./styles/App.css";
 
 class App extends Component {
@@ -24,8 +25,8 @@ class App extends Component {
         companyName: "",
         positionTitle: "",
         mainTasks: "",
-        fromk: "",
-        tok: "",
+        from: "",
+        to: "",
       },
       practExpEditDisabled: true,
       practExperienceinfoAll: [],
@@ -39,41 +40,11 @@ class App extends Component {
         from: "",
         to: "",
       },
-      //educationEditDisabled: true,
       educationInfoAll: [],
       index: 0,
       educationIndex: 0,
       editEducationButton: true,
     };
-     //Practical Experience Info
-    // this.state = {
-    //   practExperienceinfo: {
-    //     companyName: "",
-    //     positionTitle: "",
-    //     mainTasks: "",
-    //     fromk: "",
-    //     tok: "",
-    //   },
-    //   practExpEditDisabled: true,
-    //   practExperienceinfoAll: [],
-    //   counter: 0,
-    //   practExpindex: 0,
-    //   editPractExpButton: true,
-    // };
-    //Educational Info
-    // this.state = {
-    //   educationInfo: {
-    //     schoolName: "",
-    //     titleOfStudy: "",
-    //     from: "",
-    //     to: "",
-    //   },
-    //   //educationEditDisabled: true,
-    //   educationInfoAll: [],
-    //   index: 0,
-    //   educationIndex: 0,
-    //   editEducationButton: true,
-    // };
    
   }
   handlePersonalInfoChange = (e) => {
@@ -224,7 +195,6 @@ class App extends Component {
   render() {
     const userInfo = this.state.userInfo;
     const editDisabled = this.state.editDisabled;
-    console.log(editDisabled)
     const personalFunctions = {
       handleChange: this.handlePersonalInfoChange,
       onSubmitInfo: this.onSubmitPersonalInfo,
@@ -252,6 +222,14 @@ class App extends Component {
       onSubmitInfo: this.onSubmitPractExpInfo,
       getEditPractExpInfo: this.getEditPractExpInfo,
     };
+    const practicalInfoRender = this.state.practExperienceinfoAll.map((info, index) => {
+      return (
+        <>
+          {index > 0 && <h5>Practical Experience Number {index + 1}</h5>}
+          <RenderPracticalInfo key={index} practicalInfo={info}/>
+        </>
+      );
+    });
     return (
       <>
         <div className="App">
@@ -291,6 +269,7 @@ class App extends Component {
               </div>
               <div className="practicalExperience">
                 <h2>Practical Experience</h2>
+                {practicalInfoRender}
               </div>
             </div>
           </div>
