@@ -10,7 +10,7 @@ class Education extends Component {
       onSubmitInfo,
       handleChange,
       getEditEducationInfo,
-      editEducationButton
+      editEducationButton,
     } = this.props;
     return (
       <div>
@@ -65,10 +65,13 @@ class Education extends Component {
             />
           </div>
           <div id="saveBtn">
-            <button type="submit">
-              Save
-            </button>
-            <button className="edit" type="button" onClick={getEditEducationInfo} disabled={editEducationButton}>
+            <button type="submit">Save</button>
+            <button
+              className="edit"
+              type="button"
+              onClick={getEditEducationInfo}
+              disabled={editEducationButton}
+            >
               Edit
             </button>
           </div>

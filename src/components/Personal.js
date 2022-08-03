@@ -2,33 +2,17 @@ import React, { Component } from "react";
 import "../styles/Personal.css";
 
 class Personal extends Component {
-  // handleChange = (e) => {
-  //   const target = e.target;
-  //   this.setState({
-  //     userInfo: {
-  //       ...this.props.userInfo,
-  //       [target.name]: target.value,
-  //     },
-  //   });
-  // };
-
-  // onSubmitInfo = (e) => {
-  //   e.preventDefault();
-  //   this.disableForm(e.target.elements);
-  //   this.setState({
-  //     editDisabled: !this.props.editDisabled,
-  //   });
-  // };
-
-  // disableForm = (formElements) => {
-  //   console.log(formElements);
-  //   for (let i = 0; i < 5; i++) {
-  //     formElements[i].disabled = "true";
-  //   }
-  // };
-
   render() {
-    const { Fname, Lname, email, phNumber, editDisabled, onSubmitInfo, handleChange} = this.props;
+    const {
+      Fname,
+      Lname,
+      email,
+      phNumber,
+      editDisabled,
+      onSubmitInfo,
+      handleChange,
+    } = this.props;
+    console.log(editDisabled);
     return (
       <div>
         <h2>Personal Information</h2>
@@ -90,11 +74,7 @@ class Personal extends Component {
             <button type="submit" disabled={!editDisabled}>
               Save
             </button>
-            <button
-              className="edit"
-              type="submit"
-              disabled={editDisabled}
-            >
+            <button className="edit" type="submit" disabled={editDisabled}>
               Edit
             </button>
           </div>
